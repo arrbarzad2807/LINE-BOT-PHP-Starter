@@ -1,2 +1,2 @@
 <?php
-echo "Test Bot Api"
+echo "Test Bot Api";
