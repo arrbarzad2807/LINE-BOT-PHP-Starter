@@ -15,7 +15,7 @@ if (!is_null($events['events'])) {
 			// Get replyToken
 			$replyToken = $event['replyToken'];
 
-			//------------------- àµÃÕÂÁµÍº¡ÅÑº ---------
+			//------------------- เตรียมตอบกลับ ---------
 			$xStr=explode(" ",$text );
 		
 			switch ($xStr[1]) {
@@ -33,10 +33,10 @@ if (!is_null($events['events'])) {
 			        break;
 
 			    default:
-			        echo $text . " ¼Ô´ÃÙ»áºº¤ÃÑº ãªé ¤èÒ·Õè 1 (+ - * /) ¤èÒ·Õè 2 àªè¹ 1 + 2 = ?";
+			        $rText=$text . " ผิดรูปแบบครับ ใช้ ค่าที่ 1 (+ - * /) ค่าที่ 2 เช่น 1 + 2 = ?";
 			}
 
-			$text= "¨Ò¡¤Ó¶ÒÁ " . $text . " ¤ÓµÍº ¤×Í " . $rText;
+			$text= "จากคำถาม " . $text . " คำตอบ คือ " . $rText;
 			//------------------------------------------------
 
 			// Build message to reply back
