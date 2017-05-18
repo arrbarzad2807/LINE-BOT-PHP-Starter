@@ -14,31 +14,6 @@ if (!is_null($events['events'])) {
 			$text = $event['message']['text'];
 			// Get replyToken
 			$replyToken = $event['replyToken'];
-
-			//------------------- เตรียมตอบกลับ ---------
-			$xStr=explode(" ",$text );
-		
-			switch ($xStr[1]) {
-			    case "+":
-			        $rText = $xStr[0] + $xStr[2];
-			        break;
-			    case "-":
-			        $rText = $xStr[0] - $xStr[2];
-			        break;
-			    case "*":
-			        $rText = $xStr[0] * $xStr[2];
-			        break;
-			    case "/":
-			        $rText = $xStr[0] / $xStr[2];
-			        break;
-
-			    default:
-			        $rText=$text . " ผิดรูปแบบครับ ใช้ ค่าที่ 1 (+ - * /) ค่าที่ 2 เช่น 1 + 2 = ?";
-			}
-
-			$text= "จากคำถาม " . $text . " คำตอบ คือ " . $rText;
-			//------------------------------------------------
-
 			// Build message to reply back
 			$messages = [
 				'type' => 'text',
