@@ -7,6 +7,11 @@ $events = json_decode($content, true);
 // Validate parsed JSON data
 if (!is_null($events['events'])) {
 	//user id 
+$composer require linecorp/line-bot-sdk
+$httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient('<channel access token>');
+$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => '<channel secret>']);
+$response = $bot->replyText('<reply token>', 'hello!');
+	//Line Bot
 $url = 'https://api.line.me/v1/oauth/verify';
 $headers = array('Authorization: Bearer ' . $access_token);
 $ch = curl_init($url);
