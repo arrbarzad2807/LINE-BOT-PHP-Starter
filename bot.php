@@ -1,17 +1,16 @@
 <?php
 $access_token = '12muyj1ECaiKSv+TUcS5fT/6XA9S6yMogQ6oa/ASqfJgUqpm7I6kkciaIjRjvDr8iDw/HEG+MrcO6YKjzAsWQQ8R7DJqusLacqZWp7uK7ajF2qJICxMSQmUieGOvJOSd7qoZaAbNvUTD/t94kJDQLgdB04t89/1O/w1cDnyilFU=';
 // Get POST body content
+$composer require linecorp/line-bot-sdk
+$httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient('<12muyj1ECaiKSv+TUcS5fT/6XA9S6yMogQ6oa/ASqfJgUqpm7I6kkciaIjRjvDr8iDw/HEG+MrcO6YKjzAsWQQ8R7DJqusLacqZWp7uK7ajF2qJICxMSQmUieGOvJOSd7qoZaAbNvUTD/t94kJDQLgdB04t89/1O/w1cDnyilFU=>');
+$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => '<0546ebd5f096b185dc6f7c988fd2bf67>']);
+$response = $bot->replyText('<reply token>', 'hello!');
 $content = file_get_contents('php://input');
 // Parse JSON
 $events = json_decode($content, true);
 // Validate parsed JSON data
 if (!is_null($events['events'])) {
 	//user id 
-$composer require linecorp/line-bot-sdk
-$httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient('<12muyj1ECaiKSv+TUcS5fT/6XA9S6yMogQ6oa/ASqfJgUqpm7I6kkciaIjRjvDr8iDw/HEG+MrcO6YKjzAsWQQ8R7DJqusLacqZWp7uK7ajF2qJICxMSQmUieGOvJOSd7qoZaAbNvUTD/t94kJDQLgdB04t89/1O/w1cDnyilFU=>');
-$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => '<0546ebd5f096b185dc6f7c988fd2bf67>']);
-$response = $bot->replyText('<reply token>', 'hello!');
-	//Line Bot
 $url = 'https://api.line.me/v1/oauth/verify';
 $headers = array('Authorization: Bearer ' . $access_token);
 $ch = curl_init($url);
