@@ -17,6 +17,13 @@ $result = curl_exec($ch);
 curl_close($ch);
 echo $result;
 	//bot
+my $ret = $bot->get_profile($user_id);
+if ($ret->is_success) {
+    say $ret->display_name;
+    say $ret->user_id;
+    say $ret->picture_url;
+    say $ret->status_message;
+}
 	// Loop through each event
 	foreach ($events['events'] as $event) {
 		// Reply only when message sent is in 'text' format
