@@ -16,6 +16,16 @@ curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
 $result = curl_exec($ch);
 curl_close($ch);
 echo $result;
+	//
+$httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient('<channel access token>');
+$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => '<channel secret>']);
+$response = $bot->getProfile('<userId>');
+if ($response->isSucceeded()) {
+    $profile = $response->getJSONDecodedBody();
+    echo $profile['displayName'];
+    echo $profile['pictureUrl'];
+    echo $profile['statusMessage'];
+}
 	//bot
 	// Loop through each event
 	foreach ($events['events'] as $event) {
@@ -53,5 +63,6 @@ echo $result;
 		}
 	}
 }
+
 
 echo "OK";
