@@ -30,6 +30,13 @@ echo $result;
 				'type' => 'text',
 				'text' => $text." http://202.29.80.36/bizapp/skf_store/ ".$result
 			];
+			//test 
+			{
+    "type": "image",
+    "originalContentUrl": "https://www.google.co.th/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwj7k_ehi5jUAhXFOo8KHd-nCGoQjRwIBw&url=http%3A%2F%2Fwww.bloggang.com%2Fviewdiary.php%3Fid%3Dcochonelle%26month%3D03-2012%26date%3D30%26group%3D7%26gblog%3D100&psig=AFQjCNFp-Ytyi96ubs1YIPILMo7kG1wyiQ&ust=1496249870663014",
+    "previewImageUrl": "https://www.google.co.th/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwj7k_ehi5jUAhXFOo8KHd-nCGoQjRwIBw&url=http%3A%2F%2Fwww.bloggang.com%2Fviewdiary.php%3Fid%3Dcochonelle%26month%3D03-2012%26date%3D30%26group%3D7%26gblog%3D100&psig=AFQjCNFp-Ytyi96ubs1YIPILMo7kG1wyiQ&ust=1496249870663014"
+}
+			//test
 			// Make a POST Request to Messaging API to reply to sender
 			$url = 'https://api.line.me/v2/bot/message/reply';
 			$data = [
@@ -47,6 +54,7 @@ echo $result;
 			$result = curl_exec($ch);
 			curl_close($ch);
 			echo $result . "\r\n";
+			
 		}
 	}
 }
