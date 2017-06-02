@@ -3,7 +3,7 @@ $access_token = '12muyj1ECaiKSv+TUcS5fT/6XA9S6yMogQ6oa/ASqfJgUqpm7I6kkciaIjRjvDr
 $content = file_get_contents('php://input');
 $arrJson = json_decode($content, true);
  
-$strUrl = "https://api.line.me/v1/oauth/verify";
+$strUrl = "https://api.line.me/v2/bot/message/reply";
  
 $arrHeader = array();
 $arrHeader[] = "Content-Type: application/json";
