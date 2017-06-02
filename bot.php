@@ -3,7 +3,7 @@ $access_token = '12muyj1ECaiKSv+TUcS5fT/6XA9S6yMogQ6oa/ASqfJgUqpm7I6kkciaIjRjvDr
 $content = file_get_contents('php://input');
 $arrJson = json_decode($content, true);
  
-$strUrl = "https://api.line.me/v2/bot/message/reply";
+$strUrl = "'https://api.line.me/v1/oauth/verify";
  
 $arrHeader = array();
 $arrHeader[] = "Content-Type: application/json";
@@ -44,3 +44,4 @@ $result = curl_exec($ch);
 curl_close ($ch);
  
 ?>
+echo "OK";
