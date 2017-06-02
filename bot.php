@@ -64,6 +64,5 @@ curl_close ($ch);
   }
 }
 echo "OK";
-   ?>
-
+   
 
