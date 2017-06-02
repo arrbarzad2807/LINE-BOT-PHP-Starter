@@ -8,7 +8,7 @@ $strUrl = "https://api.line.me/v2/bot/message/reply";
 $arrHeader = array();
 $arrHeader[] = "Content-Type: application/json";
 $arrHeader[] = "Authorization: Bearer {$strAccessToken}";
- 
+
 if($arrJson['events'][0]['message']['text'] == "Hello"){
   $arrPostData = array();
   $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
@@ -30,8 +30,26 @@ if($arrJson['events'][0]['message']['text'] == "Hello"){
   $arrPostData['messages'][0]['type'] = "text";
   $arrPostData['messages'][0]['text'] = "ฉันไม่เข้าใจคำสั่ง";
 }
- 
- 
+ foreach ($events['events'] as $event) {
+		// Reply only when message sent is in 'text' format
+		if ($event['type'] == 'message' && $event['message']['type'] == 'text') {
+			// Get text sent
+			$text = $event['message']['text'];
+			// Get replyToken
+			$replyToken = $event['replyToken'];
+			// Build message to reply back
+			$messages = [
+				'type' => 'text',
+				'text' => $text." http://202.29.80.36/bizapp/skf_store/ ".$result
+			];
+			//test 
+		   	//test
+			// Make a POST Request to Messaging API to reply to sender
+			$url = 'https://api.line.me/v2/bot/message/reply';
+			$data = [
+				'replyToken' => $replyToken,
+				'messages' => [$messages],
+			];
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL,$strUrl);
 curl_setopt($ch, CURLOPT_HEADER, false);
@@ -42,6 +60,10 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER,true);
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 $result = curl_exec($ch);
 curl_close ($ch);
+     }
+  }
+}
 echo "OK";
-?>
+   ?>
+
 
