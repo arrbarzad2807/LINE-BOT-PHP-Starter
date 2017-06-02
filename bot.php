@@ -3,7 +3,7 @@ $access_token = '12muyj1ECaiKSv+TUcS5fT/6XA9S6yMogQ6oa/ASqfJgUqpm7I6kkciaIjRjvDr
 $content = file_get_contents('php://input');
 $arrJson = json_decode($content, true);
  
-$strUrl = "'https://api.line.me/v1/oauth/verify";
+$strUrl = "https://api.line.me/v1/oauth/verify";
  
 $arrHeader = array();
 $arrHeader[] = "Content-Type: application/json";
@@ -13,7 +13,7 @@ if($arrJson['events'][0]['message']['text'] == "สวัสดี"){
   $arrPostData = array();
   $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
   $arrPostData['messages'][0]['type'] = "text";
-  $arrPostData['messages'][0]['text'] = "สวัสดี ID คุณคือ ".$arrJson['events'][0]['source']['1513857783'];
+  $arrPostData['messages'][0]['text'] = "สวัสดี ID คุณคือ ".$arrJson['events'][0]['source']['userId'];
 }else if($arrJson['events'][0]['message']['text'] == "ชื่ออะไร"){
   $arrPostData = array();
   $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
