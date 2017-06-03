@@ -24,12 +24,14 @@ echo $result;
 		if ($event['type'] == 'message' && $event['message']['type'] == 'text') {
 			// Get text sent
 			$text = $event['message']['text'];
+			$userId = $event['events'][0]['source']['userId'];
 			// Get replyToken
 			$replyToken = $event['replyToken'];
 			// Build message to reply back
+			//"สวัสดี ID คุณคือ ".$arrJson['events'][0]['source']['userId'];
 			$messages = [
 				'type' => 'text',
-				'text' => $text." http://202.29.80.36/bizapp/skf_store/ ".$result
+				'text' => $text." http://202.29.80.36/bizapp/skf_store/ ".$result . "xxyy ". $userId;
 			];
 			//test 
 		   	//test
