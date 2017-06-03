@@ -1,26 +1,48 @@
 <?php
 
-// example: https://github.com/onlinetuts/line-bot-api/blob/master/php/example/chapter-01.php
+$strAccessToken = "2muyj1ECaiKSv+TUcS5fT/6XA9S6yMogQ6oa/ASqfJgUqpm7I6kkciaIjRjvDr8iDw/HEG+MrcO6YKjzAsWQQ8R7DJqusLacqZWp7uK7ajF2qJICxMSQmUieGOvJOSd7qoZaAbNvUTD/t94kJDQLgdB04t89/1O/w1cDnyilFU=";
 
-include ('line-bot-api/php/line-bot.php');
+$content = file_get_contents('php://input');
+$arrJson = json_decode($content, true);
 
-$channelSecret = '0546ebd5f096b185dc6f7c988fd2bf67';
-$access_token  = '12muyj1ECaiKSv+TUcS5fT/6XA9S6yMogQ6oa/ASqfJgUqpm7I6kkciaIjRjvDr8iDw/HEG+MrcO6YKjzAsWQQ8R7DJqusLacqZWp7uK7ajF2qJICxMSQmUieGOvJOSd7qoZaAbNvUTD/t94kJDQLgdB04t89/1O/w1cDnyilFU=';
+$strUrl = "https://api.line.me/v2/bot/message/reply";
 
-$bot = new BOT_API($channelSecret, $access_token);
-	
-if (!empty($bot->isEvents)) {
-		
-	$bot->replyMessageNew($bot->replyToken, json_encode($bot->message));
+$arrHeader = array();
+$arrHeader[] = "Content-Type: application/json";
+$arrHeader[] = "Authorization: Bearer {$strAccessToken}";
 
-	if ($bot->isSuccess()) {
-		echo 'Succeeded!';
-		exit();
-	}
-
-	// Failed
-	echo $bot->response->getHTTPStatus . ' ' . $bot->response->getRawBody(); 
-	exit();
-
+if($arrJson['events'][0]['message']['text'] == "สวัสดี"){
+  $arrPostData = array();
+  $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
+  $arrPostData['messages'][0]['type'] = "text";
+  $arrPostData['messages'][0]['text'] = "สวัสดี ID คุณคือ ".$arrJson['events'][0]['source']['userId'];
+}else if($arrJson['events'][0]['message']['text'] == "ชื่ออะไร"){
+  $arrPostData = array();
+  $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
+  $arrPostData['messages'][0]['type'] = "text";
+  $arrPostData['messages'][0]['text'] = "ฉันยังไม่มีชื่อนะ";
+}else if($arrJson['events'][0]['message']['text'] == "ทำอะไรได้บ้าง"){
+  $arrPostData = array();
+  $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
+  $arrPostData['messages'][0]['type'] = "text";
+  $arrPostData['messages'][0]['text'] = "ฉันทำอะไรไม่ได้เลย คุณต้องสอนฉันอีกเยอะ";
+}else{
+  $arrPostData = array();
+  $arrPostData['replyToken'] = $arrJson['events'][0]['replyToken'];
+  $arrPostData['messages'][0]['type'] = "text";
+  $arrPostData['messages'][0]['text'] = "ฉันไม่เข้าใจคำสั่ง";
 }
-echo "OK";
+
+
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL,$strUrl);
+curl_setopt($ch, CURLOPT_HEADER, false);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_HTTPHEADER, $arrHeader);
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($arrPostData));
+curl_setopt($ch, CURLOPT_RETURNTRANSFER,true);
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+$result = curl_exec($ch);
+curl_close ($ch);
+
+?>
